@@ -14,7 +14,7 @@ public:
     void push(signed char value);
     signed char pop();
     signed char peek();
-    int getTop();
+    int getTop() const;
 };
 
 #endif
