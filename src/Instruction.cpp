@@ -10,3 +10,20 @@ bool Instruction::isRegister(string text){
         text[1] >= '0' &&
         text[1] <= '7';
 }
+
+bool Instruction::isMemoryRegister(string text){
+    return text.length() == 4 &&
+           text[0] == '[' &&
+           text[1] == 'R' &&
+           text[2] >= '0' &&
+           text[2] <= '7' &&
+           text[3] == ']';
+}
+
+
+bool Instruction::isMemoryAddress(string text){
+    return text.length() >= 3 &&
+           text[0] == '[' &&
+           text[text.length() - 1] == ']';
+}
+
