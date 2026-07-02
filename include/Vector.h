@@ -1,5 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <iostream>
 
 template<class T>
 class Vector
@@ -55,14 +56,7 @@ public:
             return;
         }
 
-        T* temp = new T[length-1];
-
-        for(int i = 0; i < length-1; i++)
-            temp[i] = data[i];
-
-        delete[] data;
-
-        data = temp;
+        length--;
     }
 
     bool empty()
@@ -83,7 +77,13 @@ public:
         {
             resize();
         }
-        
+
+        if(index < 0 || index > length)
+        {
+            cout<<"Index out of range\n";
+            return;
+        }
+
         for(int i = length; i > index; i--)
         {
             data[i] = data[i-1];
@@ -95,6 +95,11 @@ public:
 
     T& operator[](int index)
     {
+        if(index < 0 || index >= length)
+        {
+            cout<<"Index out of range\n";
+            return;
+        }
         return data[index];
     }
 
