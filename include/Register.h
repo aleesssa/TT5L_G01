@@ -3,7 +3,7 @@
 
 class Register
 {
-protected:
+private:
     signed char value;
 
 public:
