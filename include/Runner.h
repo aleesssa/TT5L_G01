@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Vector.h"
+#include "CPU.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ public:
     bool validateSyntax(string tokens[],
                         int tokenCount);
 
-    void processProgram();
+    void processProgram(CPU& cpu);
 
     int getLineCount();
     string getLine(int index);

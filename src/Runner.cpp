@@ -1,4 +1,5 @@
 #include "../include/Runner.h"
+#include "../include/InstructionFactory.h"
 #include <iostream>
 #include <fstream>
 
@@ -54,7 +55,7 @@ void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
     }
 }
 
-
+// Written by: Person 2
 bool Runner::isValidInstruction(const string& instruction) {
     return instruction == "MOV" ||
            instruction == "ADD" ||
@@ -72,8 +73,7 @@ bool Runner::isValidInstruction(const string& instruction) {
            instruction == "SHL" ||
            instruction == "SHR" ||
            instruction == "ROL" ||
-           instruction == "ROR" ||
-           instruction == "RESET";
+           instruction == "ROR";
 }
 
 
@@ -99,8 +99,7 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
 
     if (op == "INC" || op == "DEC" ||
         op == "INPUT" || op == "DISPLAY" ||
-        op == "PUSH" || op == "POP" ||
-        op == "RESET") {
+        op == "PUSH" || op == "POP") {
 
         if (tokenCount != 2) {
             cout << "Syntax Error: " << op << " requires 1 operand." << endl;
@@ -124,7 +123,9 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
 
     if (op == "INC" || op == "DEC" ||
         op == "INPUT" || op == "DISPLAY" ||
-        op == "PUSH" || op == "POP") {
+        op == "PUSH" || op == "POP" ||
+        op == "SHL" || op == "SHR" ||
+        op == "ROL" || op == "ROR") {
 
         if (!isValidRegister(tokens[1])) {
             cout << "Syntax Error: Invalid register in " << op << endl;
@@ -136,7 +137,7 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
 }
 
 
-void Runner::processProgram() {
+void Runner::processProgram(CPU& cpu) {
     for (int i = 0; i < programLines.size(); i++) {
         string tokens[5];
         int tokenCount = 0;
@@ -148,7 +149,25 @@ void Runner::processProgram() {
             return;
         }
 
-        
+        Instruction* instruction =
+            InstructionFactory::createInstruction(tokens, tokenCount);
+
+        if (instruction == 0) {
+            cout << "Error: Cannot create instruction at line "
+                 << i + 1 << endl;
+            return;
+        }
+
+        instruction->execute(cpu);
+
+        if (tokens[0] != "SHL" &&
+            tokens[0] != "SHR" &&
+            tokens[0] != "ROL" &&
+            tokens[0] != "ROR") {
+            cpu.incrementPC();
+        }
+
+        delete instruction;
     }
 }
 
