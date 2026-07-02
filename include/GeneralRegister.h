@@ -12,7 +12,7 @@ private:
 public:
     GeneralRegister();
     GeneralRegister(string n);
-    string getName();
+    string getName() const;
 };
 
 #endif
