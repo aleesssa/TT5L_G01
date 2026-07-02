@@ -14,13 +14,12 @@ private:
     Stack stack;
     FlagRegister flags;
     unsigned char PC;
-    unsigned char SI;
 
 public:
     CPU();
 
     void setRegisterValue(int index, signed char value);
-    signed char getRegisterValue(int index);
+    signed char getRegisterValue(int index) const;
 
     void writeMemory(int address, signed char value);
     signed char readMemory(int address);
@@ -29,21 +28,23 @@ public:
     signed char popStack();
 
     void setZeroFlag(bool value);
-    bool getZeroFlag();
+    bool getZeroFlag() const;
 
     void setCarryFlag(bool value);
-    bool getCarryFlag();
+    bool getCarryFlag() const;
 
     void setOverflowFlag(bool value);
-    bool getOverflowFlag();
+    bool getOverflowFlag() const;
 
     void setUnderflowFlag(bool value);
-    bool getUnderflowFlag();
+    bool getUnderflowFlag() const;
 
-    int getPC();
+    int getPC() const;
     void incrementPC();
 
-    int getSI();
+    int getSI() const;
+
+    void reset();
 };
 
 #endif
