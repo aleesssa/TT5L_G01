@@ -38,12 +38,10 @@ signed char CPU::readMemory(int address)
 void CPU::pushStack(signed char value)
 {
     stack.push(value);
-    SI++;
 }
 
 signed char CPU::popStack()
 {
-    SI--;
     return stack.pop();
 }
 
@@ -87,11 +85,6 @@ bool CPU::getUnderflowFlag()
     return flags.getUnderflow();
 }
 
-void CPU::setPC(int value)
-{
-    PC = value;
-}
-
 int CPU::getPC()
 {
     return PC;
@@ -102,12 +95,7 @@ void CPU::incrementPC()
     PC++;
 }
 
-void CPU::setSI(int value)
-{
-    SI = value;
-}
-
 int CPU::getSI()
 {
-    return SI;
+    return stack.getTop() + 1;
 }
