@@ -13,9 +13,7 @@ class ArithmeticInstruction : public Instruction{
         string opcode;
         string operand1;
         string operand2;  
-
-        int getRegisterIndex(string reg);
-        bool isRegister(string text);
+        
         int getValue(CPU& cpu, string operand);
 
     public:
