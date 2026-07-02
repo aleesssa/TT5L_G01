@@ -32,6 +32,6 @@ void ShiftInstruction::execute(CPU& cpu)
 
         regValue = static_cast<signed char>(bits);
 
-    updateFlags(cpu, regValue);
+    cpu.setZeroFlag(regValue == 0);
     cpu.setRegisterValue(index, regValue);
 }
