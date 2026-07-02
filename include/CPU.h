@@ -46,11 +46,9 @@ public:
     void setUnderflowFlag(bool value);
     bool getUnderflowFlag();
 
-    void setPC(int value);
     int getPC();
     void incrementPC();
 
-    void setSI(int value);
     int getSI();
 };
 
