@@ -30,7 +30,8 @@ bool Runner::loadASMFile(const string& filename) {
 }
 
 
-void Runner::tokenize(const string& line, Vector<string>& tokens) {
+void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
+    tokenCount = 0;
     string word = "";
 
     for (int i = 0; i < line.length(); i++) {
@@ -38,7 +39,8 @@ void Runner::tokenize(const string& line, Vector<string>& tokens) {
 
         if (ch == ' ' || ch == ',' || ch == '\t') {
             if (word != "") {
-                tokens.push_back(word);
+                tokens[tokenCount] = word;
+                tokenCount++;
                 word = "";
             }
         } else {
@@ -47,7 +49,8 @@ void Runner::tokenize(const string& line, Vector<string>& tokens) {
     }
 
     if (word != "") {
-        tokens.push_back(word);
+        tokens[tokenCount] = word;
+        tokenCount++;
     }
 }
 
@@ -75,24 +78,15 @@ bool Runner::isValidInstruction(const string& instruction) {
 
 
 bool Runner::isValidRegister(const string& reg) {
-    if (reg.length() != 2) {
-        return false;
-    }
-
-    if (reg[0] != 'R') {
-        return false;
-    }
-
-    if (reg[1] < '0' || reg[1] > '7') {
-        return false;
-    }
-
-    return true;
+    return reg.length() == 2 &&
+           reg[0] == 'R' &&
+           reg[1] >= '0' &&
+           reg[1] <= '7';
 }
 
 
-bool Runner::validateSyntax(Vector<string>& tokens) {
-    if (tokens.size() == 0) {
+bool Runner::validateSyntax(string tokens[], int tokenCount) {
+    if (tokenCount == 0) {
         return false;
     }
 
@@ -108,12 +102,12 @@ bool Runner::validateSyntax(Vector<string>& tokens) {
         op == "PUSH" || op == "POP" ||
         op == "RESET") {
 
-        if (tokens.size() != 2) {
+        if (tokenCount != 2) {
             cout << "Syntax Error: " << op << " requires 1 operand." << endl;
             return false;
         }
     } else {
-        if (tokens.size() != 3) {
+        if (tokenCount != 3) {
             cout << "Syntax Error: " << op << " requires 2 operands." << endl;
             return false;
         }
@@ -139,6 +133,23 @@ bool Runner::validateSyntax(Vector<string>& tokens) {
     }
 
     return true;
+}
+
+
+void Runner::processProgram() {
+    for (int i = 0; i < programLines.size(); i++) {
+        string tokens[5];
+        int tokenCount = 0;
+
+        tokenize(programLines[i], tokens, tokenCount);
+
+        if (!validateSyntax(tokens, tokenCount)) {
+            cout << "Error found in line " << i + 1 << endl;
+            return;
+        }
+
+        
+    }
 }
 
 

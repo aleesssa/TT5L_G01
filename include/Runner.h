@@ -1,4 +1,4 @@
-#ifndef RUNNER_H 
+#ifndef RUNNER_H
 #define RUNNER_H
 
 #include <string>
@@ -6,7 +6,8 @@
 
 using namespace std;
 
-class Runner {
+class Runner
+{
 private:
     Vector<string> programLines;
 
@@ -19,9 +20,13 @@ public:
     bool loadASMFile(const string& filename);
 
     void tokenize(const string& line,
-                  Vector<string>& tokens);
+                  string tokens[],
+                  int& tokenCount);
 
-    bool validateSyntax(Vector<string>& tokens);
+    bool validateSyntax(string tokens[],
+                        int tokenCount);
+
+    void processProgram();
 
     int getLineCount();
     string getLine(int index);
