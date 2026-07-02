@@ -10,7 +10,7 @@ void Register::setValue(signed char v)
     value = v;
 }
 
-signed char Register::getValue()
+signed char Register::getValue() const
 {
     return value;
 }
