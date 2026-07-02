@@ -48,7 +48,7 @@ signed char Stack::pop()
     if(isEmpty())
     {
         cout << "Stack Underflow" << endl;
-        return;
+        return 0;
     }
 
     signed char value;
@@ -70,7 +70,7 @@ signed char Stack::peek()
     return stack[top];
 }
 
-int Stack::getTop()
+int Stack::getTop() const
 {
     return top;
 }
