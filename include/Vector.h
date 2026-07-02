@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include <iostream>
+#include <cstdlib>
 
 template<class T>
 class Vector
@@ -98,7 +99,7 @@ public:
         if(index < 0 || index >= length)
         {
             cout<<"Index out of range\n";
-            return;
+            exit(1);
         }
         return data[index];
     }
