@@ -69,3 +69,8 @@ signed char Stack::peek()
 
     return stack[top];
 }
+
+int Stack::getTop()
+{
+    return top;
+}
