@@ -13,7 +13,7 @@ ArithmeticInstruction::ArithmeticInstruction(string op, string op1, string op2){
 
 int ArithmeticInstruction::getValue(CPU& cpu, string operand){
     if (isRegister(operand)){
-        return cpu.getRegister(getRegisterIndex(operand));
+        return cpu.getRegisterValue(getRegisterIndex(operand));
     }
 
     return atoi(operand.c_str());
@@ -21,7 +21,7 @@ int ArithmeticInstruction::getValue(CPU& cpu, string operand){
 
 void ArithmeticInstruction::execute(CPU& cpu){
     int dest = getRegisterIndex(operand1);
-    int left = cpu.getRegister(dest);
+    int left = cpu.getRegisterValue(dest);
     int result = left;
 
     if (opcode == "ADD"){
@@ -50,7 +50,7 @@ void ArithmeticInstruction::execute(CPU& cpu){
         result = left - 1;
     }
 
-    cpu.updateFlags(result);
-    cpu.setRegister(dest, result);
+    updateFlags(cpu, result);
+    cpu.setRegisterValue(dest, result);
 
 }

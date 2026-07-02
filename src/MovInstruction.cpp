@@ -21,11 +21,11 @@ void MovInstruction::execute(CPU& cpu){
 
     if(isRegister(operand2)){
         int src = getRegisterIndex(operand2);
-        value = cpu.getRegister(src);
+        value = cpu.getRegisterValue(src);
     }
     else if(isMemoryRegister(operand2)){
         int srcReg = operand2[2] - '0';
-        int address = cpu.getRegister(srcReg);
+        int address = cpu.getRegisterValue(srcReg);
         value = cpu.readMemory(address);
     }
     else if(isMemoryAddress(operand2)){
@@ -36,6 +36,6 @@ void MovInstruction::execute(CPU& cpu){
         value = atoi(operand2.c_str());
     }
 
-    cpu.updateFlags(value);
-    cpu.setRegister(dest, value);
+    updateFlags(cpu, value);
+    cpu.setRegisterValue(dest, value);
 }

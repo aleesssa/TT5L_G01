@@ -12,13 +12,13 @@ void StackInstruction::execute(CPU& cpu){
     int reg = getRegisterIndex(operand1);
 
     if(opcode == "PUSH"){
-        int value = cpu.getRegister(reg);
+        int value = cpu.getRegisterValue(reg);
         cpu.pushStack(value);
     }
     else if(opcode == "POP"){
         int value = cpu.popStack();
-        cpu.setRegister(reg, value);
-        cpu.updateFlags(value);
+        cpu.setRegisterValue(reg, value);
+        updateFlags(cpu, value);
     }
 }
 

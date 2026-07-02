@@ -18,10 +18,10 @@ void IOInstruction::execute(CPU& cpu){
         cout << "? ";
         cin >> value;
 
-        cpu.updateFlags(value);
-        cpu.setRegister(reg, value);
+        updateFlags(cpu, value);
+        cpu.setRegisterValue(reg, value);
     }
     else if(opcode == "DISPLAY"){
-        cout << cpu.getRegister(reg) << endl;
+        cout << cpu.getRegisterValue(reg) << endl;
     }
 }
