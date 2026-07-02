@@ -33,22 +33,22 @@ void FlagRegister::setZero(bool x)
     ZF = x;
 }
 
-bool FlagRegister::getOverflow()
+bool FlagRegister::getOverflow() const
 {
     return OF;
 }
 
-bool FlagRegister::getUnderflow()
+bool FlagRegister::getUnderflow() const
 {
     return UF;
 }
 
-bool FlagRegister::getCarry()
+bool FlagRegister::getCarry() const
 {
     return CF;
 }
 
-bool FlagRegister::getZero()
+bool FlagRegister::getZero() const
 {
     return ZF;
 }
