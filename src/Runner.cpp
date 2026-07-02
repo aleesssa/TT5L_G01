@@ -4,14 +4,11 @@
 
 using namespace std;
 
-// Written by: Person 2
-// Purpose: Constructor initializes number of program lines to 0
+
 Runner::Runner() {
-    lineCount = 0;
 }
 
-// Written by: Person 2
-// Purpose: Reads assembly file line by line
+
 bool Runner::loadASMFile(const string& filename) {
     ifstream inputFile(filename.c_str());
 
@@ -24,8 +21,7 @@ bool Runner::loadASMFile(const string& filename) {
 
     while (getline(inputFile, line)) {
         if (line != "") {
-            programLines[lineCount] = line;
-            lineCount++;
+            programLines.push_back(line);
         }
     }
 
@@ -33,10 +29,8 @@ bool Runner::loadASMFile(const string& filename) {
     return true;
 }
 
-// Written by: Person 2
-// Purpose: Splits one instruction line into tokens
-void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
-    tokenCount = 0;
+
+void Runner::tokenize(const string& line, Vector<string>& tokens) {
     string word = "";
 
     for (int i = 0; i < line.length(); i++) {
@@ -44,8 +38,7 @@ void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
 
         if (ch == ' ' || ch == ',' || ch == '\t') {
             if (word != "") {
-                tokens[tokenCount] = word;
-                tokenCount++;
+                tokens.push_back(word);
                 word = "";
             }
         } else {
@@ -54,13 +47,11 @@ void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
     }
 
     if (word != "") {
-        tokens[tokenCount] = word;
-        tokenCount++;
+        tokens.push_back(word);
     }
 }
 
-// Written by: Person 2
-// Purpose: Checks valid instruction names
+
 bool Runner::isValidInstruction(const string& instruction) {
     return instruction == "MOV" ||
            instruction == "ADD" ||
@@ -82,8 +73,7 @@ bool Runner::isValidInstruction(const string& instruction) {
            instruction == "RESET";
 }
 
-// Written by: Person 2
-// Purpose: Checks register format R0 to R7
+
 bool Runner::isValidRegister(const string& reg) {
     if (reg.length() != 2) {
         return false;
@@ -100,10 +90,9 @@ bool Runner::isValidRegister(const string& reg) {
     return true;
 }
 
-// Written by: Person 2
-// Purpose: Validates syntax based on instruction and operand count
-bool Runner::validateSyntax(string tokens[], int tokenCount) {
-    if (tokenCount == 0) {
+
+bool Runner::validateSyntax(Vector<string>& tokens) {
+    if (tokens.size() == 0) {
         return false;
     }
 
@@ -119,18 +108,17 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
         op == "PUSH" || op == "POP" ||
         op == "RESET") {
 
-        if (tokenCount != 2) {
+        if (tokens.size() != 2) {
             cout << "Syntax Error: " << op << " requires 1 operand." << endl;
             return false;
         }
     } else {
-        if (tokenCount != 3) {
+        if (tokens.size() != 3) {
             cout << "Syntax Error: " << op << " requires 2 operands." << endl;
             return false;
         }
     }
 
-    // Register validation for common cases
     if (op == "ADD" || op == "SUB" ||
         op == "MUL" || op == "DIV") {
 
@@ -153,16 +141,14 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
     return true;
 }
 
-// Written by: Person 2
-// Purpose: Returns number of loaded instructions
-int Runner::getLineCount() const {
-    return lineCount;
+
+int Runner::getLineCount() {
+    return programLines.size();
 }
 
-// Written by: Person 2
-// Purpose: Returns one instruction line
-string Runner::getLine(int index) const {
-    if (index >= 0 && index < lineCount) {
+
+string Runner::getLine(int index) {
+    if (index >= 0 && index < programLines.size()) {
         return programLines[index];
     }
 
