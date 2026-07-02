@@ -1,30 +1,32 @@
 #include "ShiftInstruction.h"
 
-ShiftInstruction::ShiftInstruction()
-{
-}
-
-void ShiftInstruction::shiftLeft(unsigned char& value)
-{
-    value <<= 1;
-}
-
-void ShiftInstruction::shiftRight(unsigned char& value)
-{
-    value >>= 1;
-}
-
-void ShiftInstruction::rotateLeft(unsigned char& value)
-{
-    value = (value << 1) | (value >> 7);
-}
-
-void ShiftInstruction::rotateRight(unsigned char& value)
-{
-    value = (value >> 1) | (value << 7);
-}
-
 void ShiftInstruction::execute(CPU& cpu)
 {
-    // Will be completed after CPU interface is available.
+    int index = getRegisterIndex(destination);
+    signed char regValue = cpu.getRegisterValue(index);
+
+    if (operation == "SHL")
+    {
+        regValue <<= 1;
+    }
+    else if (operation == "SHR")
+    {
+        regValue >>= 1;
+    }
+    else if (operation == "ROL")
+    {
+        unsigned char temp = static_cast<unsigned char>(regValue);
+        temp = (temp << 1) | (temp >> 7);
+        regValue = static_cast<signed char>(temp);
+    }
+    else if (operation == "ROR")
+    {
+        unsigned char temp = static_cast<unsigned char>(regValue);
+        temp = (temp >> 1) | (temp << 7);
+        regValue = static_cast<signed char>(temp);
+    }
+
+    cpu.setRegisterValue(index, regValue);
+    cpu.setZeroFlag(regValue == 0);
+    cpu.incrementPC();
 }
