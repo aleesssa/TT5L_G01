@@ -55,7 +55,7 @@ void Runner::tokenize(const string& line, string tokens[], int& tokenCount) {
     }
 }
 
-// Written by: Person 2
+
 bool Runner::isValidInstruction(const string& instruction) {
     return instruction == "MOV" ||
            instruction == "ADD" ||
