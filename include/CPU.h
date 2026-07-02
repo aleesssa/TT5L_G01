@@ -9,20 +9,14 @@
 class CPU
 {
 private:
-
     GeneralRegister registers[8];
-
     Memory memory;
-
     Stack stack;
-
     FlagRegister flags;
-
     unsigned char PC;
     unsigned char SI;
 
 public:
-
     CPU();
 
     void setRegisterValue(int index, signed char value);
