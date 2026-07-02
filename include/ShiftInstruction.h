@@ -11,11 +11,12 @@ class ShiftInstruction : public Instruction
 private:
     string operation; // SHL, SHR, ROL, ROR
     string destination; // Register name (R0...)
+    string count;
 
 public:
-    ShiftInstruction(string op, string dest) : operation(op), destination(dest) {}
+    ShiftInstruction(string op, string dest, string c);
 
-    void execute(CPU& cpu);
+    void execute(CPU& cpu) override;
 };
 
 #endif

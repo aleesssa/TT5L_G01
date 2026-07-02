@@ -1,32 +1,37 @@
 #include "ShiftInstruction.h"
+#include <cstdlib>
+
+using namespace std;
+
+ShiftInstruction::ShiftInstruction(string op, string dest, string c) : operation(op), destination(dest), count(c) {}
 
 void ShiftInstruction::execute(CPU& cpu)
 {
     int index = getRegisterIndex(destination);
     signed char regValue = cpu.getRegisterValue(index);
+    unsigned char bits = static_cast<unsigned char>(regValue);
+
+    int shift = atoi(count.c_str()) % 8; // Ensure the shift count is within 0-7
 
     if (operation == "SHL")
     {
-        regValue <<= 1;
+        bits <<= shift;
     }
-    else if (operation == "SHR")
+    else if(operation == "SHR")
     {
-        regValue >>= 1;
+        bits >>= shift;
     }
-    else if (operation == "ROL")
+    else if(operation == "ROL")
     {
-        unsigned char temp = static_cast<unsigned char>(regValue);
-        temp = (temp << 1) | (temp >> 7);
-        regValue = static_cast<signed char>(temp);
+        bits = (bits << shift) | (bits >> (8 - shift));
     }
-    else if (operation == "ROR")
+    else if(operation == "ROR")
     {
-        unsigned char temp = static_cast<unsigned char>(regValue);
-        temp = (temp >> 1) | (temp << 7);
-        regValue = static_cast<signed char>(temp);
+        bits = (bits >> shift) | (bits << (8 - shift));
     }
 
+        regValue = static_cast<signed char>(bits);
+
+    updateFlags(cpu, regValue);
     cpu.setRegisterValue(index, regValue);
-    cpu.setZeroFlag(regValue == 0);
-    cpu.incrementPC();
 }
