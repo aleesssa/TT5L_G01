@@ -34,4 +34,6 @@ void ShiftInstruction::execute(CPU& cpu)
 
     cpu.setZeroFlag(regValue == 0);
     cpu.setRegisterValue(index, regValue);
+
+    cpu.incrementPC();
 }

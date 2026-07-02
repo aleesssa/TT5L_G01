@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void DumpState::print(CPU& cpu)
+void DumpState::display(CPU& cpu)
 {
     cout <<"CPU STATE\n";
 
@@ -22,7 +22,6 @@ void DumpState::print(CPU& cpu)
     }
 
     cout << "\nFlags\n";
-
     cout << "ZF : " << cpu.getZeroFlag() << endl;
     cout << "CF : " << cpu.getCarryFlag() << endl;
     cout << "OF : " << cpu.getOverflowFlag() << endl;
@@ -38,6 +37,8 @@ void DumpState::print(CPU& cpu)
              << " ";
 
         if((i + 1) % 8 == 0)
+        {
             cout << endl;
+        }
     }
 }
