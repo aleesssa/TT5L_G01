@@ -20,7 +20,7 @@ signed char Memory::read(int address)
     if(address < 0 || address >= 64)
     {
         cout << "Invalid memory address\n";
-        return;
+        return 0;
     }
     return mem[address];
 }
