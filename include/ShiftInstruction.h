@@ -1,23 +1,21 @@
 #ifndef SHIFTINSTRUCTION_H
 #define SHIFTINSTRUCTION_H
 
-class CPU;
+#include <string>
+#include "Instruction.h"
 
-// Instruction class will come from Person 3
-class Instruction;
+using namespace std;
 
-class ShiftInstruction
+class ShiftInstruction : public Instruction
 {
+private:
+    string operation; // SHL, SHR, ROL, ROR
+    string destination; // Register name (R0...)
+
 public:
-    ShiftInstruction();
+    ShiftInstruction(string op, string dest) : operation(op), destination(dest) {}
 
     void execute(CPU& cpu);
-
-private:
-    void shiftLeft(unsigned char& value);
-    void shiftRight(unsigned char& value);
-    void rotateLeft(unsigned char& value);
-    void rotateRight(unsigned char& value);
 };
 
 #endif
