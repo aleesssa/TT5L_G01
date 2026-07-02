@@ -27,3 +27,9 @@ bool Instruction::isMemoryAddress(string text){
            text[text.length() - 1] == ']';
 }
 
+void Instruction::updateFlags(CPU& cpu, int result) {
+    cpu.setOverflowFlag(result > 127);
+    cpu.setUnderflowFlag(result < -128);
+    cpu.setCarryFlag(result > 255 || result < -255);
+    cpu.setZeroFlag(result == 0);
+}
