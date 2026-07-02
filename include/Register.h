@@ -9,7 +9,7 @@ protected:
 public:
     Register();
     void setValue(signed char v);
-    signed char getValue();
+    signed char getValue() const;
 };
 
 #endif
