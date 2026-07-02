@@ -35,12 +35,10 @@ void ArithmeticInstruction::execute(CPU& cpu){
     }
     else if(opcode == "DIV"){
         int right = getValue(cpu, operand2);
-
         if(right == 0){
             cout << "Error: Division by zero." << endl;
             return;
         }
- 
         result = left / right;
     }
     else if(opcode == "INC"){
@@ -49,8 +47,7 @@ void ArithmeticInstruction::execute(CPU& cpu){
     else if(opcode == "DEC"){
         result = left - 1;
     }
-
+    
     updateFlags(cpu, result);
     cpu.setRegisterValue(dest, result);
-
 }
