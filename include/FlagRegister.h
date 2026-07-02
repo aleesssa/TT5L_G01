@@ -16,10 +16,10 @@ public:
     void setUnderflow(bool x);
     void setCarry(bool x);
     void setZero(bool x);
-    bool getOverflow();
-    bool getUnderflow();
-    bool getCarry();
-    bool getZero();
+    bool getOverflow() const;
+    bool getUnderflow() const;
+    bool getCarry() const;
+    bool getZero() const;
 };
 
 #endif
