@@ -2,35 +2,35 @@
 #define RUNNER_H
 
 #include <string>
-#include "Vector.h"
-
 using namespace std;
 
 class Runner {
 private:
-    // Stores all cleaned instructions from the .asm file
-    Vector<std::string> programLines;
+    string programLines[100]; //array to hold the program lines
+    int lineCount; //number of lines in the program
 
     //Helper functions
-    bool isValidInstruction(const std::string& instruction);
-    bool isValidRegister(const std::string& reg);
+    bool isValidInstruction(const string& instruction);
+    bool isValidRegister(const string& reg);
 
 public:
     // Constructor
     Runner();
 
     //reads an assembly file
-    bool loadASMFile(const std::string& filename);
+    bool loadASMFile(const string& filename);
 
     //splits 1 instruction into tokens
-    void tokenize(const std::string& line,
-                    Vector<std::string>& tokens);
+    void tokenize(const string& line,
+                  string tokens[],
+                  int& tokenCount);
 
     //validates 1 instruction
-    bool validateSyntax(const Vector<std::string>& tokens);
-    
-    //gives other classes access to the loaded program
-    const Vector<std::string>& getProgramLines() const;
+    bool validateSyntax(string tokens[],
+                        int tokenCount);
+
+    int getLineCount() const;
+    string getLine(int index) const;
 };
 
 #endif 
