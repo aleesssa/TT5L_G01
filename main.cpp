@@ -621,7 +621,7 @@ class Instruction{
         bool isMemoryRegister(string text); // verify if operand is memory register
         bool isMemoryAddress(string text); // verify if operand is memory address
         void updateFlags(CPU& cpu, int result); // update flags for when destination register is modified
-
+    
 
     public:
         virtual void execute(CPU& cpu) = 0;
@@ -961,6 +961,52 @@ void StackInstruction::execute(CPU& cpu){
 }
 
 /*=========================================================
+Class: ResetInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+class ResetInstruction : public Instruction
+{
+private:
+    string opcode;
+    string operand1;
+
+public:
+    ResetInstruction(string op, string op1);
+    void execute(CPU& cpu);
+};
+
+/*=========================================================
+Implementation: ResetInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
+ResetInstruction::ResetInstruction(string op, string op1)
+{
+    opcode = op;
+    operand1 = op1;
+}
+
+void ResetInstruction::execute(CPU& cpu)
+{
+    if (operand1 == "CF")
+    {
+        cpu.setCarryFlag(false);
+    }
+    else if (operand1 == "OF")
+    {
+        cpu.setOverflowFlag(false);
+    }
+    else if (operand1 == "UF")
+    {
+        cpu.setUnderflowFlag(false);
+    }
+    else if (operand1 == "ZF")
+    {
+        cpu.setZeroFlag(false);
+    }
+}
+
+/*=========================================================
 Class: ShiftInstruction
 Author: NUR DAMIA' BATRISYIA
 =========================================================*/
@@ -1035,35 +1081,48 @@ Author: Aleessa Batrisyia Binti Azwan
 Instruction* InstructionFactory::createInstruction(string tokens[], int tokenCount) {
     string op = tokens[0];
     if (op == "ADD" || op == "SUB" || op == "MUL" || op == "DIV") {
-        if (tokenCount != 3) { return 0; }
+        if (tokenCount != 3) { return nullptr; }
         return new ArithmeticInstruction(op, tokens[1], tokens[2]);
     }
     if (op == "INC" || op == "DEC") {
-        if (tokenCount != 2) { return 0; }
+        if (tokenCount != 2) { return nullptr; }
         return new ArithmeticInstruction(op, tokens[1]);
     }
     if (op == "INPUT" || op == "DISPLAY") {
-        if (tokenCount != 2) { return 0; }
+        if (tokenCount != 2) { return nullptr; }
         return new IOInstruction(op, tokens[1]);
     }
     if (op == "MOV") {
-        if (tokenCount != 3) { return 0; }
+        if (tokenCount != 3) { return nullptr; }
         return new MovInstruction(op, tokens[1], tokens[2]);
     }
     if (op == "PUSH" || op == "POP") {
-        if (tokenCount != 2) { return 0; }
+        if (tokenCount != 2) { return nullptr; }
         return new StackInstruction(op, tokens[1]);
     }
     if (op == "LOAD" || op == "STORE") {
-        if (tokenCount != 3) { return 0; }
+        if (tokenCount != 3) { return nullptr; }
         return new MemoryInstruction(op, tokens[1], tokens[2]);
     }
     if (op == "SHL" || op == "SHR" || op == "ROL" || op == "ROR") {
-        if (tokenCount != 3) { return 0; }
+        if (tokenCount != 3) { return nullptr; }
 
         return new ShiftInstruction(op, tokens[1], tokens[2]);
     }
-    return 0;
+    if (op == "RESET") {
+        if (tokens[1] != "CF" &&
+        tokens[1] != "OF" &&
+        tokens[1] != "UF" &&
+        tokens[1] != "ZF")
+        {
+            cout << "Syntax Error: Invalid flag." << endl;
+            return nullptr;
+        }
+        
+        if (tokenCount != 2) { return nullptr; }
+        return new ResetInstruction(op, tokens[1]);
+    }
+    return nullptr;
 }
 
 /*=========================================================
@@ -1231,7 +1290,8 @@ bool Runner::isValidInstruction(const string& instruction) {
            instruction == "SHL" ||
            instruction == "SHR" ||
            instruction == "ROL" ||
-           instruction == "ROR";
+           instruction == "ROR" ||
+           instruction == "RESET";
 }
 
 
@@ -1257,7 +1317,7 @@ bool Runner::validateSyntax(string tokens[], int tokenCount) {
 
     if (op == "INC" || op == "DEC" ||
         op == "INPUT" || op == "DISPLAY" ||
-        op == "PUSH" || op == "POP") {
+        op == "PUSH" || op == "POP" || op == "RESET") {
 
         if (tokenCount != 2) {
             cout << "Syntax Error: " << op << " requires 1 operand." << endl;
