@@ -729,7 +729,7 @@ void ArithmeticInstruction::execute(CPU& cpu){
         int right = getValue(cpu, operand2); // get value at operand2 
         
         // if value at operand2 is 0 then output error division by zero
-        if(left == 0){
+        if(right == 0){
             cout << "Error: Division by zero." << endl;
             return;
         }
@@ -1118,7 +1118,7 @@ Instruction* InstructionFactory::createInstruction(string tokens[], int tokenCou
             cout << "Syntax Error: Invalid flag." << endl;
             return nullptr;
         }
-        
+
         if (tokenCount != 2) { return nullptr; }
         return new ResetInstruction(op, tokens[1]);
     }
