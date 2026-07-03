@@ -728,7 +728,7 @@ void ArithmeticInstruction::execute(CPU& cpu){
         int right = getValue(cpu, operand2); // get value at operand2 
         
         // if value at operand2 is 0 then output error division by zero
-        if(right == 0){
+        if(left == 0){
             cout << "Error: Division by zero." << endl;
             return;
         }
@@ -1311,8 +1311,6 @@ void Runner::processProgram(CPU& cpu) {
 
         delete instruction;
 
-        DumpState dump;
-        dump.display(cpu);
     }
 }
 
@@ -1337,7 +1335,7 @@ Author: ALEESSA BATRISYIA
 int main(int argc, char* argv[])
 {
     if (argc < 2) {
-        cout << "Usage: vm <filename.asm>" << endl;
+        cout << "Usage: main <filename.asm>" << endl;
         return 1;
     }
 
