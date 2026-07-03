@@ -3,7 +3,7 @@
 
 /*=========================================================
 Class: Stack
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 class Stack
@@ -18,8 +18,8 @@ public:
     bool isFull();
     void push(signed char value);
     signed char pop();
-    signed char peek();
-    int getTop() const;
+    signed char peek(); //get top element
+    int getTop() const; //get top index
 };
 
 #endif

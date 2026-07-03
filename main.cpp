@@ -10,108 +10,106 @@ using namespace std;
 
 /*=========================================================
 Tempalte: Vector
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 template<class T>
 class Vector
 {
 private:
-
     T* data;
     int length;
     int capacity;
 
     void resize()
     {
-        capacity *= 2;
+        capacity *= 2;  //double the array capacity
 
-        T* temp = new T[capacity];
+        T* temp = new T[capacity];  //create a dynamic temporary array
 
         for(int i = 0; i < length; i++)
-            temp[i] = data[i];
+            temp[i] = data[i];  //assign all elements from old array to new array
 
-        delete[] data;
+        delete[] data;  //delete old array
 
-        data = temp;
+        data = temp;    //temp array is the new data array
     }
 
 public:
-
     Vector()
     {
         capacity = 4;
         length = 0;
-        data = new T[capacity];
+        data = new T[capacity]; //when a vector is created, a dynamic array with capacity 4 is created
     }
 
     ~Vector()
     {
-        delete[] data;
+        delete[] data;  //delete the dynamic array from memory
     }
 
     void push_back(T value)
     {
-        if(length == capacity)
+        if(length == capacity)  //if the length of the elements in the array has reached max capacity, the array resizes
             resize();
 
-        data[length] = value;
-        length++;
+        data[length] = value;   //assign the given value to the last index
+        length++;   //increase length aka the index
     }
 
     void pop_back()
     {
         if(length == 0)
         {
-            cout << "Vector is empty." << endl;
+            cout << "Vector is empty." << endl; //if the array is empty, give error message
             return;
         }
 
-        length--;
+        length--;   //reduce the length aka the index so that cannot access the last element
     }
 
     bool empty()
     {
         if(length == 0)
         {
-            return true;
+            return true;    //return true if empty
         }
         else
         {
-            return false;
+            return false;   //return  false if not empty
         }
     }
 
     void insert(int index, T value)
     {
-        if(length == capacity)
+        if(length == capacity)  //if the length of the elements in the array has reached max capacity, the array resizes
         {
             resize();
         }
 
         if(index < 0 || index > length)
         {
-            cout<<"Index out of range\n";
+            cout<<"Index out of range\n";   //if the index value given is more than the length of the array or less than 0, give error message
             return;
         }
 
         for(int i = length; i > index; i--)
         {
-            data[i] = data[i-1];
+            data[i] = data[i-1];    //shifting/copying all elements from the desired index location to the right
         }
 
-        data[index] = value;
-        length++;
+        data[index] = value;    //assign the value given to the index position
+        length++;   //increase length
     }
 
     T& operator[](int index)
     {
         if(index < 0 || index >= length)
         {
-            cout<<"Index out of range\n";
+            cout<<"Index out of range\n";   //if the index value given is more than the length of the array or less than 0, give error message
             exit(1);
         }
-        return data[index];
+        return data[index]; //when operator [] is used, it returns the value at the given index
     }
 
     int size()
@@ -122,7 +120,7 @@ public:
 
 /*=========================================================
 Class: Stack
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 class Stack
@@ -137,13 +135,13 @@ public:
     bool isFull();
     void push(signed char value);
     signed char pop();
-    signed char peek();
-    int getTop() const;
+    signed char peek(); //get top element
+    int getTop() const; //get top index
 };
 
 /*=========================================================
 Implementation: Stack
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 Stack::Stack()
@@ -155,11 +153,11 @@ bool Stack::isEmpty()
 {
     if(top == -1)
     {
-        return true;
+        return true;    //return true if empty
     }
     else
     {
-        return false;
+        return false;   //return false if not empty
     }
 }
 
@@ -167,11 +165,11 @@ bool Stack::isFull()
 {
     if(top == 7)
     {
-        return true;
+        return true;    //return true if full aka there are 8 elements in the stack
     }
     else
     {
-        return false;
+        return false;   //return false if not full
     }
 }
 
@@ -179,49 +177,49 @@ void Stack::push(signed char value)
 {
     if(isFull())
     {
-        cout << "Stack Overflow" << endl;
+        cout << "Stack Overflow" << endl;   //give error message if stack is full
         return;
     }
 
-    top++;
-    stack[top] = value;
+    top++;  //increase top index value
+    stack[top] = value; //assign given value to top of stack
 }
 
 signed char Stack::pop()
 {
     if(isEmpty())
     {
-        cout << "Stack Underflow" << endl;
+        cout << "Stack Underflow" << endl;  //give error message if stack is empty
         return 0;
     }
 
     signed char value;
-    value = stack[top];
+    value = stack[top]; //assign the top most element of the stack to variable value
 
-    top--;
+    top--;  //decrease the top index to 'remove' the element from stack
 
-    return value;
+    return value;   //return the value variable which is the top most element that was 'removed'
 }
 
 signed char Stack::peek()
 {
     if(isEmpty())
     {
-        cout << "Stack is empty\n";
+        cout << "Stack is empty\n"; //give error message if stack is empty
         return 0;
     }
 
-    return stack[top];
+    return stack[top];  //return the top most element
 }
 
 int Stack::getTop() const
 {
-    return top;
+    return top; //return the top element's index
 }
 
 /*=========================================================
 Class: Register
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class Register
 {
@@ -236,26 +234,26 @@ public:
 
 /*=========================================================
 Implementation: Register
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 Register::Register()
 {
-    value = 0;
+    value = 0;  //all register value initially 0
 }
 
 void Register::setValue(signed char v)
 {
-    value = v;
+    value = v;  //set value of the chosen register to the given value
 }
 
 signed char Register::getValue() const
 {
-    return value;
+    return value;   //get the value associated with the chosen register
 }
 
 /*=========================================================
 Class: GeneralRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class GeneralRegister : public Register
 {
@@ -270,27 +268,27 @@ public:
 
 /*=========================================================
 Implementation: GeneralRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 GeneralRegister::GeneralRegister()
 {
-    name = "";
+    name = "";  //default constructor to initialize register name to ""
 }
 
 GeneralRegister::GeneralRegister(string n)
 {
-    name = n;
+    name = n;   //constructor to set register name to given name
 }
 
 string GeneralRegister::getName() const
 {
-    return name;
+    return name;    //return the name of the register aka R0-R7
 }
 
 
 /*=========================================================
 Class: FlagRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class FlagRegister
 {
@@ -315,16 +313,16 @@ public:
 
 /*=========================================================
 Implementation: FlagRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 FlagRegister::FlagRegister()
 {
-    reset();
+    reset();    //whenever the flag register is initialized, all flags are reset
 }
 
 void FlagRegister::reset()
 {
-    OF = false;
+    OF = false; //all flags are reset aka all flags are set to false/0
     UF = false;
     CF = false;
     ZF = false;
@@ -332,52 +330,52 @@ void FlagRegister::reset()
 
 void FlagRegister::setOverflow(bool x)
 {
-    OF = x;
+    OF = x; //set the overflow flag to the given boolean value
 }
 
 void FlagRegister::setUnderflow(bool x)
 {
-    UF = x;
+    UF = x; //set the underflow flag to the given boolean value
 }
 
 void FlagRegister::setCarry(bool x)
 {
-    CF = x;
+    CF = x; //set the carry flag to the given boolean value
 }
 
 void FlagRegister::setZero(bool x)
 {
-    ZF = x;
+    ZF = x; //set the zero flag to the given boolean value
 }
 
 bool FlagRegister::getOverflow() const
 {
-    return OF;
+    return OF;  //return the overflow flag boolean value
 }
 
 bool FlagRegister::getUnderflow() const
 {
-    return UF;
+    return UF;  //return the underflow flag boolean value
 }
 
 bool FlagRegister::getCarry() const
 {
-    return CF;
+    return CF;  //return the carry flag boolean value
 }
 
 bool FlagRegister::getZero() const
 {
-    return ZF;
+    return ZF;  //return the zero flag boolean value
 }
 
 /*=========================================================
 Class: Memory
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class Memory
 {
 private:
-    signed char mem[64];
+    signed char mem[64];    //an array with 64 space is created
 
 public:
     Memory();
@@ -388,18 +386,18 @@ public:
 
 /*=========================================================
 Implementation: Memory
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 Memory::Memory()
 {
-    clear();
+    clear();    //whenever the memory is initialized, it is cleared
 }
 
 void Memory::clear()
 {
     for(int i = 0; i < 64; i++)
     {
-        mem[i] = 0;
+        mem[i] = 0; //set to 0 for all memory address
     }
 }
 
@@ -407,32 +405,32 @@ signed char Memory::read(int address)
 {
     if(address < 0 || address >= 64)
     {
-        cout << "Invalid memory address\n";
+        cout << "Invalid memory address\n"; //give error message if the given memory address is < 0 or >= 64 which is the max number of addresses
         return 0;
     }
-    return mem[address];
+    return mem[address];    //return the value at the address aka index
 }
 
 void Memory::write(int address, signed char value)
 {
     if(address < 0 || address >= 64)
     {
-        cout << "Invalid memory address\n";
+        cout << "Invalid memory address\n"; //give error message if the given memory address is < 0 or >= 64 which is the max number of addresses
         return;
     }
-    mem[address] = value;
+    mem[address] = value;   //assign the given value to the address aka the index position in the array
 }
 
 
 /*=========================================================
 Class: CPU
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 class CPU
 {
 private:
-    GeneralRegister registers[8];
+    GeneralRegister registers[8];   //initialize 8 register objects through an array
     Memory memory;
     Stack stack;
     FlagRegister flags;
@@ -472,12 +470,12 @@ public:
 
 /*=========================================================
 Implementation: CPU
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 CPU::CPU()
 {
-    registers[0] = GeneralRegister("R0");
+    registers[0] = GeneralRegister("R0");   //initialize each register with the given name from R0-R7
     registers[1] = GeneralRegister("R1");
     registers[2] = GeneralRegister("R2");
     registers[3] = GeneralRegister("R3");
@@ -486,128 +484,128 @@ CPU::CPU()
     registers[6] = GeneralRegister("R6");
     registers[7] = GeneralRegister("R7");
 
-    PC = 0;
+    PC = 0; //set Program Counter to 0
 }
 
 void CPU::setRegisterValue(int index, signed char value)
 {
     if(index < 0 || index >= 8)
     {
-        cout<<"Invalid register\n";
+        cout<<"Invalid register\n";   //if the index value given is more than 8 which is the max number of registers or less than 0, give error message
         return;
     }
-    registers[index].setValue(value);
+    registers[index].setValue(value);   //use member function inherited from Register class to set value of the chosen register at the given index
 }
 
 signed char CPU::getRegisterValue(int index) const
 {
     if(index < 0 || index >= 8)
     {
-        cout<<"Invalid register\n";
+        cout<<"Invalid register\n";   //if the index value given is more than 8 which is the max number of registers or less than 0, give error message
         return 0;
     }
-    return registers[index].getValue();
+    return registers[index].getValue(); //use the member function inherited from Register class to get value stored in the chosen register
 }
 
 void CPU::writeMemory(int address, signed char value)
 {
     if(address < 0 || address >= 64)
     {
-        cout << "Invalid memory address\n";
+        cout << "Invalid memory address\n"; //give error message if the given memory address is < 0 or >= 64 which is the max number of addresses
         return;
     }
-    memory.write(address, value);
+    memory.write(address, value);   //write the value given into the address chosen using the member function from Memory class
 }
 
 signed char CPU::readMemory(int address)
 {
     if(address < 0 || address >= 64)
     {
-        cout << "Invalid memory address\n";
+        cout << "Invalid memory address\n"; //give error message if the given memory address is < 0 or >= 64 which is the max number of addresses
         return 0;
     }
-    return memory.read(address);
+    return memory.read(address);    //get the value stored in the address given using member function from Memory class
 }
 
 void CPU::pushStack(signed char value)
 {
-    stack.push(value);
+    stack.push(value);  //use member function of Stack class (stack operation) to push given value into stack
 }
 
 signed char CPU::popStack()
 {
-    return stack.pop();
+    return stack.pop();  //use member function of Stack class (stack operation) to pop the last value from stack
 }
 
 void CPU::setZeroFlag(bool value)
 {
-    flags.setZero(value);
+    flags.setZero(value);   //use member function from Flag Register class to set value for zero flag
 }
 
 bool CPU::getZeroFlag() const
 {
-    return flags.getZero();
+    return flags.getZero();   //use member function from Flag Register class to get value for zero flag
 }
 
 void CPU::setCarryFlag(bool value)
 {
-    flags.setCarry(value);
+    flags.setCarry(value);   //use member function from Flag Register class to set value for carry flag
 }
 
 bool CPU::getCarryFlag() const
 {
-    return flags.getCarry();
+    return flags.getCarry();   //use member function from Flag Register class to get value for carry flag
 }
 
 void CPU::setOverflowFlag(bool value)
 {
-    flags.setOverflow(value);
+    flags.setOverflow(value);   //use member function from Flag Register class to set value for overflow flag
 }
 
 bool CPU::getOverflowFlag() const
 {
-    return flags.getOverflow();
+    return flags.getOverflow();   //use member function from Flag Register class to get value for overflow flag
 }
 
 void CPU::setUnderflowFlag(bool value)
 {
-    flags.setUnderflow(value);
+    flags.setUnderflow(value);   //use member function from Flag Register class to set value for underflow flag
 }
 
 bool CPU::getUnderflowFlag() const
 {
-    return flags.getUnderflow();
+    return flags.getUnderflow();   //use member function from Flag Register class to get value for underflow flag
 }
 
 int CPU::getPC() const
 {
-    return PC;
+    return PC;  //return the current program counter
 }
 
 void CPU::incrementPC()
 {
-    PC++;
+    PC++;   //increment program counter by 1
 }
 
 int CPU::getSI() const
 {
-    return stack.getTop() + 1;
+    return stack.getTop() + 1;  //get stack index by getting the top index of stack using member function from Stack class and +1
 }
 
 void CPU::reset()
 {
-    PC = 0;
-    memory.clear();
-    flags.reset();
+    PC = 0; //PC set to 0
+    memory.clear(); //memory cleared by setting all to 0
+    flags.reset();  //all flags reset aka set to false/0
 
     while(!stack.isEmpty())
     {
-        stack.pop();
+        stack.pop();    //while stack is not empty, keep popping elements until stack is empty
     }
 
     for(int i = 0; i < 8; i++)
     {
-        registers[i].setValue(0);
+        registers[i].setValue(0);   //set to 0 for all register values
     }
 }
 

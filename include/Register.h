@@ -3,7 +3,7 @@
 
 /*=========================================================
 Class: Register
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class Register
 {

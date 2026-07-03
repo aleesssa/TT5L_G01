@@ -8,13 +8,13 @@
 
 /*=========================================================
 Class: CPU
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 
 class CPU
 {
 private:
-    GeneralRegister registers[8];
+    GeneralRegister registers[8];   //initialize 8 register objects through an array
     Memory memory;
     Stack stack;
     FlagRegister flags;
