@@ -2,19 +2,19 @@
 
 /*=========================================================
 Implementation: GeneralRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 GeneralRegister::GeneralRegister()
 {
-    name = "";
+    name = "";  //default constructor to initialize register name to ""
 }
 
 GeneralRegister::GeneralRegister(string n)
 {
-    name = n;
+    name = n;   //constructor to set register name to given name
 }
 
 string GeneralRegister::getName() const
 {
-    return name;
+    return name;    //return the name of the register aka R0-R7
 }

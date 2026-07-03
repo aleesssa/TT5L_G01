@@ -10,39 +10,50 @@ Author: NUR DAMIA' BATRISYIA
 =========================================================*/
 void DumpState::display(CPU& cpu)
 {
-    cout <<"CPU STATE\n";
+    cout << "#Begin#" << endl;
 
-    cout << "PC : " << cpu.getPC() << endl;
-    cout << "SI : " << cpu.getSI() << endl;
-
-    cout << "\nRegisters\n";
+    cout << "#Registers#";
 
     for(int i = 0; i < 8; i++)
     {
-        cout << "R" << i << " : "
-             << setw(4)
+        cout << setw(4)
              << setfill('0')
-             << (int)cpu.getRegisterValue(i)  << endl;
+             << (int)cpu.getRegisterValue(i)
+             << "#";
     }
 
-    cout << "\nFlags\n";
-    cout << "ZF : " << cpu.getZeroFlag() << endl;
-    cout << "CF : " << cpu.getCarryFlag() << endl;
-    cout << "OF : " << cpu.getOverflowFlag() << endl;
-    cout << "UF : " << cpu.getUnderflowFlag() << endl;
+    cout << endl;
 
-    cout << "\nMemory\n";
+    cout << "#Flags#";
+    cout << "OF#" << cpu.getOverflowFlag() << "#";
+    cout << "UF#" << cpu.getUnderflowFlag() << "#";
+    cout << "CF#" << cpu.getCarryFlag() << "#";
+    cout << "ZF#" << cpu.getZeroFlag() << "#";
+
+    cout << endl;
+
+    cout << "#PC#";
+    cout << setw(4)
+         << setfill('0')
+         << cpu.getPC()
+         << "#";
+
+    cout << endl;
+
+    cout << "#Memory#" << endl;
 
     for(int i = 0; i < 64; i++)
     {
-        cout << setw(4)
+        cout << "#"
+             << setw(4)
              << setfill('0')
-             << (int)cpu.readMemory(i)
-             << " ";
+             << (int)cpu.readMemory(i);
 
         if((i + 1) % 8 == 0)
         {
-            cout << endl;
+            cout << "#" << endl;
         }
     }
+
+    cout << "#End#" << endl;
 }

@@ -6,7 +6,7 @@ using namespace std;
 
 /*=========================================================
 Class: GeneralRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class GeneralRegister : public Register
 {

@@ -3,12 +3,12 @@
 
 /*=========================================================
 Class: Memory
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class Memory
 {
 private:
-    signed char mem[64];
+    signed char mem[64];    //an array with 64 space is created
 
 public:
     Memory();

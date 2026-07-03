@@ -3,7 +3,7 @@
 
 /*=========================================================
 Class: FlagRegister
-Author: QAISARAH
+Author: QAISARAH SHAMSUL AZRAN
 =========================================================*/
 class FlagRegister
 {
