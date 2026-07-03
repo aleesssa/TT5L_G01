@@ -637,6 +637,7 @@ int Instruction::getRegisterIndex(string reg){
     return reg[1] - '0';
 }
 
+// check if operand is register
 bool Instruction::isRegister(string text){
     return text.length() == 2 &&
         text[0] == 'R' &&
@@ -644,6 +645,7 @@ bool Instruction::isRegister(string text){
         text[1] <= '7';
 }
 
+// check if operand is a memory register
 bool Instruction::isMemoryRegister(string text){
     return text.length() == 4 &&
            text[0] == '[' &&
@@ -653,13 +655,14 @@ bool Instruction::isMemoryRegister(string text){
            text[3] == ']';
 }
 
-
+// check if operand is a memory address
 bool Instruction::isMemoryAddress(string text){
     return text.length() >= 3 &&
            text[0] == '[' &&
            text[text.length() - 1] == ']';
 }
 
+// update flags for when destination register is modified
 void Instruction::updateFlags(CPU& cpu, int result) {
     cpu.setOverflowFlag(result > 127);
     cpu.setUnderflowFlag(result < -128);
@@ -726,7 +729,7 @@ void ArithmeticInstruction::execute(CPU& cpu){
         int right = getValue(cpu, operand2); // get value at operand2 
         
         // if value at operand2 is 0 then output error division by zero
-        if(right == 0){
+        if(left == 0){
             cout << "Error: Division by zero." << endl;
             return;
         }
@@ -817,7 +820,7 @@ MovInstruction::MovInstruction(string op, string op1, string op2){
     operand2 = op2;
 }
 
-// Get the address stored in register with []
+// Get the address stored within []
 int MovInstruction::getAddressFromBracket(string text){
     string numberText = text.substr(1, text.length() - 2);
     return atoi(numberText.c_str());
@@ -827,15 +830,18 @@ void MovInstruction::execute(CPU& cpu){
     int dest = getRegisterIndex(operand1); 
     int value = 0;
 
+    // for MOV R0, R1
     if(isRegister(operand2)){
         int src = getRegisterIndex(operand2);
         value = cpu.getRegisterValue(src); // get the value stored at operand2
     }
+    // for MOV R0, [R1]
     else if(isMemoryRegister(operand2)){
         int srcReg = operand2[2] - '0';
         int address = cpu.getRegisterValue(srcReg);
         value = cpu.readMemory(address);
     }
+    // for MOV R0, [<memory address>]
     else if(isMemoryAddress(operand2)){
         int address = getAddressFromBracket(operand2);
         value = cpu.readMemory(address);
@@ -877,9 +883,10 @@ MemoryInstruction::MemoryInstruction(string op, string op1, string op2){
     operand2 = op2;
 }
 
+
 int MemoryInstruction::getAddress(CPU& cpu, string operand){
     if(isMemoryRegister(operand)){
-        int reg = operand[2] - '0';
+        int reg = operand[2] - '0'; // get the register number within []
         return cpu.getRegisterValue(reg);
     }
 
@@ -893,12 +900,12 @@ int MemoryInstruction::getAddress(CPU& cpu, string operand){
 
 void MemoryInstruction::execute(CPU& cpu){
     if(opcode == "LOAD"){
-        int dest = getRegisterIndex(operand1);
-        int address = getAddress(cpu, operand2);
+        int dest = getRegisterIndex(operand1); // get register index for operand1
+        int address = getAddress(cpu, operand2); // get the memory address for operand2
 
-        int value = cpu.readMemory(address);
+        int value = cpu.readMemory(address); // get the value stored at memory address
 
-        cpu.setRegisterValue(dest, value);
+        cpu.setRegisterValue(dest, value); // store the value in the destination register (operand1)
         updateFlags(cpu, value);
     }
     else if(opcode == "STORE"){
@@ -906,11 +913,11 @@ void MemoryInstruction::execute(CPU& cpu){
         int address;
 
         if(isRegister(operand1)){
-            value = cpu.getRegisterValue(getRegisterIndex(operand1));
-            address = getAddress(cpu, operand2);
+            value = cpu.getRegisterValue(getRegisterIndex(operand1)); // get value stored at operand1
+            address = getAddress(cpu, operand2); // get memory address for operand2
         }
 
-        cpu.writeMemory(address, value);
+        cpu.writeMemory(address, value); // store value in memory at address 
     }
 }
 
@@ -943,13 +950,13 @@ void StackInstruction::execute(CPU& cpu){
     int reg = getRegisterIndex(operand1);
 
     if(opcode == "PUSH"){
-        int value = cpu.getRegisterValue(reg);
-        cpu.pushStack(value);
+        int value = cpu.getRegisterValue(reg); // get value from operand1
+        cpu.pushStack(value); // push to system stack
     }
     else if(opcode == "POP"){
-        int value = cpu.popStack();
-        cpu.setRegisterValue(reg, value);
-        updateFlags(cpu, value);
+        int value = cpu.popStack(); // pop from system stack
+        cpu.setRegisterValue(reg, value); // store the popped item at register (operand1)
+        updateFlags(cpu, value); 
     }
 }
 
@@ -1320,8 +1327,6 @@ void Runner::processProgram(CPU& cpu) {
 
         delete instruction;
 
-        DumpState dump;
-        dump.display(cpu);
     }
 }
 
@@ -1346,7 +1351,7 @@ Author: ALEESSA BATRISYIA
 int main(int argc, char* argv[])
 {
     if (argc < 2) {
-        cout << "Usage: vm <filename.asm>" << endl;
+        cout << "Usage: main <filename.asm>" << endl;
         return 1;
     }
 
