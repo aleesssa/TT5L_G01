@@ -1,0 +1,2 @@
+MOV R0, 20
+STORE R0, 10

@@ -1,4 +1,7 @@
-#include "Instruction.h"
+#include "../include/Instruction.h"
+#include "../include/CPU.h"
+#include <string>
+
 
 int Instruction::getRegisterIndex(string reg){
     return reg[1] - '0';

@@ -1,5 +1,6 @@
-#ifndef INSTRUCTION_h
+#ifndef INSTRUCTION_H
 #define INSTRUCTION_H
+#include <string>
 #include "CPU.h"
 
 class Instruction{
