@@ -785,7 +785,7 @@ void IOInstruction::execute(CPU& cpu){
         cpu.setRegisterValue(reg, value);
     }
     else if(opcode == "DISPLAY"){
-        cout << cpu.getRegisterValue(reg) << endl; // display value at register
+        cout << (int)cpu.getRegisterValue(reg) << endl; // display value at register
     }
 }
 
