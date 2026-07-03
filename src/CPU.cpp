@@ -2,6 +2,11 @@
 #include <iostream>
 using namespace std;
 
+/*=========================================================
+Implementation: CPU
+Author: QAISARAH
+=========================================================*/
+
 CPU::CPU()
 {
     registers[0] = GeneralRegister("R0");

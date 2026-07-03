@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/*=========================================================
+Implementation: MemoryInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 MemoryInstruction::MemoryInstruction(string op, string op1, string op2){
     opcode = op;
     operand1 = op1;

@@ -2,6 +2,10 @@
 #include "../include/CPU.h"
 #include <string>
 
+/*=========================================================
+Implementation: Instruction
+Author: Aleessa Batrisyia Binti Azwan
+=========================================================*/
 
 int Instruction::getRegisterIndex(string reg){
     return reg[1] - '0';

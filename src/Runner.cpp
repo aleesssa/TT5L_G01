@@ -7,7 +7,10 @@
 
 using namespace std;
 
-
+/*=========================================================
+Implementation: Runner
+Author: NUR ALYA IMAN
+=========================================================*/
 Runner::Runner() {
 }
 
@@ -171,8 +174,7 @@ void Runner::processProgram(CPU& cpu) {
 
         delete instruction;
 
-        DumpState dump;
-        dump.display(cpu);
+
     }
 }
 

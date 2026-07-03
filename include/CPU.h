@@ -6,6 +6,11 @@
 #include "Stack.h"
 #include "FlagRegister.h"
 
+/*=========================================================
+Class: CPU
+Author: QAISARAH
+=========================================================*/
+
 class CPU
 {
 private:

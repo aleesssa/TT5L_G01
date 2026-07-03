@@ -1,6 +1,10 @@
 #ifndef FLAGREGISTER_H
 #define FLAGREGISTER_H
 
+/*=========================================================
+Class: FlagRegister
+Author: QAISARAH
+=========================================================*/
 class FlagRegister
 {
 private:

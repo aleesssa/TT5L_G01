@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*=========================================================
+Implementation: ShiftInstruction
+Author: NUR DAMIA' BATRISYIA
+=========================================================*/
 ShiftInstruction::ShiftInstruction(string op, string dest, string c) : operation(op), destination(dest), count(c) {}
 
 void ShiftInstruction::execute(CPU& cpu)

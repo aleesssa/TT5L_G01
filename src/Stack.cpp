@@ -2,6 +2,11 @@
 #include "Stack.h"
 using namespace std;
 
+/*=========================================================
+Implementation: Stack
+Author: QAISARAH
+=========================================================*/
+
 Stack::Stack()
 {
     top = -1;

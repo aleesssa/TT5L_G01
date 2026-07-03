@@ -1,5 +1,9 @@
 #include "FlagRegister.h"
 
+/*=========================================================
+Implementation: FlagRegister
+Author: QAISARAH
+=========================================================*/
 FlagRegister::FlagRegister()
 {
     reset();

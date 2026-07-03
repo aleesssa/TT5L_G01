@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/*=========================================================
+Class: StackInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 class StackInstruction : public Instruction{
     private:
         string opcode;

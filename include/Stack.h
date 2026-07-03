@@ -1,6 +1,11 @@
 #ifndef STACK_H
 #define STACK_H
 
+/*=========================================================
+Class: Stack
+Author: QAISARAH
+=========================================================*/
+
 class Stack
 {
 private:

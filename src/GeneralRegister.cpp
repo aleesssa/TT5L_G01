@@ -1,5 +1,9 @@
 #include "GeneralRegister.h"
 
+/*=========================================================
+Implementation: GeneralRegister
+Author: QAISARAH
+=========================================================*/
 GeneralRegister::GeneralRegister()
 {
     name = "";
