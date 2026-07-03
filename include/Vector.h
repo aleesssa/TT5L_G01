@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/*=========================================================
+Tempalte: Vector
+Author: QAISARAH
+=========================================================*/
+
 template<class T>
 class Vector
 {

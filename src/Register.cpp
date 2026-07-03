@@ -1,5 +1,9 @@
 #include "Register.h"
 
+/*=========================================================
+Implementation: Register
+Author: QAISARAH
+=========================================================*/
 Register::Register()
 {
     value = 0;

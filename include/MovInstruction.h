@@ -5,6 +5,12 @@
 #include <string>
 using namespace std;
 
+
+/*=========================================================
+Class: MovInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 class MovInstruction : public Instruction{
     private:
         string opcode;

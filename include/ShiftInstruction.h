@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/*=========================================================
+Class: ShiftInstruction
+Author: NUR DAMIA' BATRISYIA
+=========================================================*/
+
 class ShiftInstruction : public Instruction
 {
 private:

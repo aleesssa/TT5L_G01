@@ -4,24 +4,31 @@
 
 using namespace std;
 
+/*=========================================================
+Implementation: MovInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
+// Constructor
 MovInstruction::MovInstruction(string op, string op1, string op2){
     opcode = op;
     operand1 = op1;
     operand2 = op2;
 }
 
+// Get the address stored in register with []
 int MovInstruction::getAddressFromBracket(string text){
     string numberText = text.substr(1, text.length() - 2);
     return atoi(numberText.c_str());
 }
 
 void MovInstruction::execute(CPU& cpu){
-    int dest = getRegisterIndex(operand1);
+    int dest = getRegisterIndex(operand1); 
     int value = 0;
 
     if(isRegister(operand2)){
         int src = getRegisterIndex(operand2);
-        value = cpu.getRegisterValue(src);
+        value = cpu.getRegisterValue(src); // get the value stored at operand2
     }
     else if(isMemoryRegister(operand2)){
         int srcReg = operand2[2] - '0';

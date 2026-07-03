@@ -1,6 +1,10 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
+/*=========================================================
+Class: Register
+Author: QAISARAH
+=========================================================*/
 class Register
 {
 private:

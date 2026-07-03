@@ -3,6 +3,12 @@
 
 using namespace std;
 
+
+/*=========================================================
+Implementation: StackInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 StackInstruction::StackInstruction(string op, string op1){
     opcode = op;
     operand1 = op1;

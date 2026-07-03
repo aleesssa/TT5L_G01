@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*=========================================================
+Implementation: DumpState
+Author: NUR DAMIA' BATRISYIA
+=========================================================*/
 void DumpState::display(CPU& cpu)
 {
     cout <<"CPU STATE\n";

@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+/*=========================================================
+Implementation: Memory
+Author: QAISARAH
+=========================================================*/
 Memory::Memory()
 {
     clear();

@@ -4,6 +4,10 @@
 #include <string>
 using namespace std;
 
+/*=========================================================
+Class: GeneralRegister
+Author: QAISARAH
+=========================================================*/
 class GeneralRegister : public Register
 {
 private:

@@ -7,6 +7,11 @@
 #include "ShiftInstruction.h"
 using namespace std;
 
+/*=========================================================
+Implementation: InstructionFactory
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 Instruction* InstructionFactory::createInstruction(string tokens[], int tokenCount) {
     string op = tokens[0];
     if (op == "ADD" || op == "SUB" || op == "MUL" || op == "DIV") {

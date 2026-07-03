@@ -4,6 +4,12 @@
 #include <string>
 using namespace std;
 
+
+/*=========================================================
+Class: MemoryInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 class MemoryInstruction : public Instruction{
     private:
         string opcode;

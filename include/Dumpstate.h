@@ -3,6 +3,10 @@
 
 #include "CPU.h"
 
+/*=========================================================
+Class: DumpState
+Author: NUR DAMIA' BATRISYIA
+=========================================================*/
 class DumpState
 {
 public:

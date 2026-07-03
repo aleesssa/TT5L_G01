@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/*=========================================================
+Implementation: IOInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 IOInstruction::IOInstruction(string op, string op1){
     opcode = op;
     operand1 = op1;
@@ -16,12 +21,12 @@ void IOInstruction::execute(CPU& cpu){
         int value;
 
         cout << "? ";
-        cin >> value;
+        cin >> value; // Get value from user
 
-        updateFlags(cpu, value);
+        updateFlags(cpu, value); // update flags because register is modified
         cpu.setRegisterValue(reg, value);
     }
     else if(opcode == "DISPLAY"){
-        cout << cpu.getRegisterValue(reg) << endl;
+        cout << cpu.getRegisterValue(reg) << endl; // display value at register
     }
 }

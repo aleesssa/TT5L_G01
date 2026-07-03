@@ -6,6 +6,13 @@
 
 using namespace std;
 
+
+
+/*=========================================================
+Class: IOInstruction
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 class IOInstruction : public Instruction{
     private:
         string opcode;

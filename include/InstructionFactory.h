@@ -5,6 +5,12 @@
 #include <string>
 using namespace std;
 
+
+/*=========================================================
+Class: InstructionFactory
+Author: Aleessa Batrisyia Binti Azwan 
+=========================================================*/
+
 class InstructionFactory {
 public:
     static Instruction* createInstruction(string tokens[], int tokenCount);

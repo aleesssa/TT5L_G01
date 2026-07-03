@@ -7,6 +7,10 @@
 
 using namespace std;
 
+/*=========================================================
+Class: Runner
+Author: NUR ALYA IMAN
+=========================================================*/
 class Runner
 {
 private:
