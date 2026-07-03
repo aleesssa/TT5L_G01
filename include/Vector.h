@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cstdlib>
 
+using namespace std;
+
 template<class T>
 class Vector
 {

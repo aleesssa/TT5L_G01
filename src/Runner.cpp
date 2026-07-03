@@ -1,7 +1,9 @@
 #include "../include/Runner.h"
 #include "../include/InstructionFactory.h"
+#include "../include/DumpState.h"
 #include <iostream>
 #include <fstream>
+
 
 using namespace std;
 
@@ -168,6 +170,9 @@ void Runner::processProgram(CPU& cpu) {
         }
 
         delete instruction;
+
+        DumpState dump;
+        dump.display(cpu);
     }
 }
 
